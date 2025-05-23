@@ -8,6 +8,6 @@ public class HotelBookingAppApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HotelBookingAppApplication.class, args);
-	}
+	}//
 
 }
