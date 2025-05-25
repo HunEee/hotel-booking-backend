@@ -5,12 +5,14 @@ import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.HunEee.hotel_booking_app.exception.ResourceNotFoundException;
 import com.HunEee.hotel_booking_app.model.Room;
 import com.HunEee.hotel_booking_app.repository.RoomRepository;
 
@@ -39,4 +41,26 @@ public class RoomService implements IRoomService{
 	public List<String> getAllRoomTypes() {
 		return roomRepository.findDistinctRoomTypes();
 	}
+
+	@Override
+	public List<Room> getAllrooms() {
+		return roomRepository.findAll();
+	}
+
+	@Override
+	public byte[] getRoomPhotoByRoomId(Long roomId) throws SQLException {
+		Optional<Room>theRoom = roomRepository.findById(roomId);
+		if(theRoom.isEmpty()) {
+			throw new ResourceNotFoundException("죄송합니다, 방을 찾을 수 없습니다.");
+		}
+		Blob photoBlob = theRoom.get().getPhoto();
+		if(photoBlob != null) {
+			return photoBlob.getBytes(1, (int)photoBlob.length());
+		}
+		return null;
+	}
+	
+	
+	
+	
 }
