@@ -8,8 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +37,7 @@ public class RoomController {
     private final IRoomService roomService;
     private final BookingService bookingService;
 
-    // 방 등록--------------------------------------------------------------------------------------------------
+    // 객실 생성--------------------------------------------------------------------------------------------------
     @PostMapping("/add/new-room")
     public ResponseEntity<RoomResponse> addNewRoom(
             @RequestParam("photo") MultipartFile photo,
@@ -51,9 +54,9 @@ public class RoomController {
     	return roomService.getAllRoomTypes();
     	
     }
-    // 방 등록--------------------------------------------------------------------------------------------------
+    // 객실 생성--------------------------------------------------------------------------------------------------
     
-    // 방 검색--------------------------------------------------------------------------------------------------
+    // 객실 검색--------------------------------------------------------------------------------------------------
     @GetMapping("/all-rooms")
     public ResponseEntity<List<RoomResponse>> getAllrooms() throws SQLException{
     	List<Room> rooms = roomService.getAllrooms();
@@ -97,7 +100,14 @@ public class RoomController {
 
     }
     
-    // 방 검색--------------------------------------------------------------------------------------------------
+    // 객실 검색--------------------------------------------------------------------------------------------------
+    
+    // 객실 삭제--------------------------------------------------------------------------------------------------
+    @DeleteMapping("/delete/room/{roomId}")
+    public ResponseEntity<Void> deleteRoom(@PathVariable Long roomId){
+        roomService.deleteRoom(roomId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
     
     
 	
