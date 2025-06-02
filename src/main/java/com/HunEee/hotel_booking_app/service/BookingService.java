@@ -19,4 +19,28 @@ public class BookingService implements IBookingService {
 	public List<BookedRoom> getAllBookingsByRoomId(Long roomId) {
 	    return bookingRepository.findByRoomId(roomId);
 	}
+
+	@Override
+	public List<BookedRoom> getAllBookings() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BookedRoom findByBookingConfirmationCode(String confirmationCode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String saveBooking(Long roomId, BookedRoom bookingRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void cancelBooking(Long bookingId) {
+		// TODO Auto-generated method stub
+		
+	}
 }
