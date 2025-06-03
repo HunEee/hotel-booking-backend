@@ -75,7 +75,7 @@ public class BookingController {
         try{
             String confirmationCode = bookingService.saveBooking(roomId, bookingRequest);
             return ResponseEntity.ok(
-                    "Room booked successfully, Your booking confirmation code is :"+confirmationCode);
+                    "객실 예약에 성공하였습니다, 고객님의 예약확정코드는 :"+confirmationCode);
 
         }catch (InvalidBookingRequestException e){
             return ResponseEntity.badRequest().body(e.getMessage());
