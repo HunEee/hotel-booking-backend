@@ -51,7 +51,7 @@ public class BookingService implements IBookingService {
 		    }
 		    return bookingRequest.getBookingConfirmationCode();
 	}
-
+	
 	private boolean roomIsAvailable(BookedRoom bookingRequest, List<BookedRoom> existingBookings) {
         return existingBookings.stream()
                 .noneMatch(existingBooking ->
